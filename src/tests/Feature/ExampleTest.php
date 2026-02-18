@@ -7,15 +7,17 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
+  use RefreshDatabase;
 
-        $response->assertStatus(200);
-    }
+  /**
+   * A basic test example.
+   *
+   * @return void
+   */
+  public function test_example()
+  {
+    $response = $this->get('/contacts');
+
+    $response->assertStatus(200);
+  }
 }
