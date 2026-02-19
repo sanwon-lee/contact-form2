@@ -7,7 +7,7 @@
 1. docker compose up -d --buildを実行します。
 1. cp src/.env.example src/.envを実行し、src/.envの以下の項目を修正します。
 
-```src/.env
+```properties:src/.env
 <!-- 以下の4つの項目はルートの.envに合わせます -->
 DB_HOST
 DB_DATABASE
