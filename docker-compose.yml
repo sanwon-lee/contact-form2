@@ -17,6 +17,7 @@ services:
   mysql:
     image: mysql:lts
     environment:
+      # 機密情報の漏洩を防止するため値を直接書かない
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -30,6 +31,7 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=mysql
+      # ここも機密情報
       - PMA_USER=${MYSQL_USER}
       - PMA_PASSWORD=${MYSQL_PASSWORD}
     depends_on:
