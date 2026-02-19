@@ -4,7 +4,22 @@
 
 1. このリモートリポジトリをローカル環境にクローンします
 1. プロジェクトのルート（.gitが置かれているディレクトリ）でcp .env.example .envを実行し、.envの内容を修正します
-1. 必要に応じてdocker-compose.override.ymlを作成し内容を記述します
+1. docker-compose.override.ymlを作成し必要に応じて以下の内容を記述します
+
+```docker-compose.override.yml
+services:
+  php:
+    build:
+      args:
+        - UID=自身のユーザーID
+        - GID=自身のグループID
+        - USER_NAME=使用したいユーザーネーム
+        - GROUP_NAME=使用したいグループネーム
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      - COMPOSER_HOME=/tmp/composer
+```
+
 1. docker compose up -d --buildを実行します
 1. cp src/.env.example src/.envを実行し、src/.envの以下の項目を.envに合わせて修正します
 

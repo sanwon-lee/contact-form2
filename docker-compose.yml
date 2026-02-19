@@ -10,7 +10,16 @@ services:
       - php
 
   php:
-    build: ./docker/php
+    build:
+      context: ./docker/php
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+        - USER_NAME=${USER_NAME:-myuser}
+        - GROUP_NAME=${GROUP_NAME:-myuser}
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      - COMPOSER_HOME=/tmp/composer
     volumes:
       - ./src:/var/www/
 
@@ -20,7 +29,7 @@ services:
       - ./docker/mysql/data:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
-      # 機密情報の漏洩を防止するため値を直接書かない
+      # 機密情報の漏洩を防止するため値を直接書かない。代わりに.envで指定する
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
