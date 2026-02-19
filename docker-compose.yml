@@ -16,18 +16,20 @@ services:
 
   mysql:
     image: mysql:lts
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       # 機密情報の漏洩を防止するため値を直接書かない
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    volumes:
-      - ./docker/mysql/data:/var/lib/mysql
-      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=mysql
@@ -36,5 +38,3 @@ services:
       - PMA_PASSWORD=${MYSQL_PASSWORD}
     depends_on:
       - mysql
-    ports:
-      - 8080:80

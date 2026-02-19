@@ -5,7 +5,7 @@ ARG GID=1000
 ARG USER_NAME=myuser
 ARG GROUP_NAME=myuser
 
-COPY docker/php/php.ini /usr/local/etc/php/
+COPY php.ini /usr/local/etc/php/
 
 RUN apt update \
   && apt install -y default-mysql-client zlib1g-dev libzip-dev unzip \
