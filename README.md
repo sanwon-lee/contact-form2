@@ -25,7 +25,7 @@ SESSION_DRIVER
 1. php artisan key:generateを実行します。
 1. phpunitの代わりにpestを使いたい場合はsrc/phpunit.xmlにおいて以下のコメントアウトを外します。
 
-```src/phpunit.xml
+```xml:src/phpunit.xml
 <!-- <server name="DB_CONNECTION" value="sqlite"/> -->
 <!-- <server name="DB_DATABASE" value=":memory:"/> -->
 ```
