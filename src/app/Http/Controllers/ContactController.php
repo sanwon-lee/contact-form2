@@ -26,32 +26,26 @@ class ContactController extends Controller
 
   public function back(Request $request)
   {
-    $inputs = $request->session()->get('contact_inputs');
-
-    // URL直打ち対策として
-    if (!$inputs) {
-      return redirect()->route('contacts.index');
-    }
+    //無効なセッションのとき、$inputsを[]にする
+    $inputs = $request->session()->get('contact_inputs') ?? [];
 
     return redirect()->route('contacts.index')->withInput($inputs);
   }
 
   public function store(Request $request)
   {
-    $inputs = $request->session()->get('contact_inputs');
-
-    // セッションタイムアウト対策
-    if (!$inputs) {
-      return redirect()->route('contacts.index')->with('message', 'セッションの有効期限が切れました。');
-    }
+    //無効なセッション対策
+    $inputs = $request->session()->get('contact_inputs') ?? [];
 
     Contact::create($inputs);
 
     // 二重送信防止のためセッションを空にする
     $request->session()->forget('contact_inputs');
 
-    // 二重送信防止のためview('contacts.thanks')ではなくredirectを用いる
-    // thanks()アクションを別途用意する
+    // 二重送信防止のためthanks()アクションを別途用意しview()ではなくredirect()を用いる
+    // view()だとブラウザのアドレスバーのURL自体は変わらないため、更新(F5など)によって二重送信されてしまうリスクがある
+    // redirect()を用いることでURL自体が送信完了画面のものになるため、誤送信を防止できる
+    // 一般にPRG(Post Redirect Get)モデルと呼ばれる
     return redirect()->route('contacts.thanks');
   }
 
