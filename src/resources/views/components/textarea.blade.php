@@ -1,5 +1,5 @@
 @php
-    use App\Models\Contact;
+  use App\Models\Contact;
 @endphp
 
 @props(['field'])
@@ -8,10 +8,12 @@
   $label = Contact::COL_LABELS[$field];
 @endphp
 
-<label for="{{ $field }}" class="form__label">{{ $label }}</label>
+<div class="form__item">
+  <label for="{{ $field }}" class="form__label form__label--textarea">{{ $label }}</label>
 
-<textarea name="{{ $field }}" id="{{ $field }}" class="form__textarea" {{ $attributes }}>{{ old($field) }}</textarea>
+  <textarea name="{{ $field }}" id="{{ $field }}" class="form__textarea" rows="10" {{ $attributes }}>{{ old($field) }}</textarea>
 
-@error($field)
-  <span class="err-msg">{{ $message }}</span>
-@enderror
+  @error($field)
+    <span class="err-msg">{{ $message }}</span>
+  @enderror
+</div>

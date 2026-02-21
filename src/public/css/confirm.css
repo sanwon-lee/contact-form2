@@ -1,4 +1,52 @@
-#submit-btn:disabled {
+.confirm {
+  margin: 6.5rem auto 0;
+  width: 90%;
+  max-width: 1230px;
+  text-align: center;
+}
+
+.confirm__body {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+
+.confirm__body-label,
+.confirm__body-content {
+  border: 1px solid #ccc;
+  padding: 1rem 0;
+
+  &:not(:first-of-type) {
+    border-top: none;
+  }
+}
+
+.confirm__body-label {
+  background: #80dbb2;
+}
+
+.confirm__body-content {
+  text-align: left;
+}
+
+.confirm__form-inner {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.confirm__form-btn {
+  width: 8rem;
+  padding: 1rem;
+  border-radius: 100vh;
+  background: #f1be98;
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+.confirm__form-btn:disabled {
   background: #ccc;
   cursor: not-allowed;
   opacity: 0.7;

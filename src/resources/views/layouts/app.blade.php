@@ -14,7 +14,7 @@
     <a href="{{ route('contacts.index') }}" class="header__logo">Contact Form</a>
   </header>
 
-  <main>
+  <main class="main">
     @yield('content')
     @stack('scripts')
   </main>

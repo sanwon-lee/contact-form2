@@ -8,38 +8,53 @@
     <meta name="robots" content="noindex">
 @endpush
 
+@section('title')
+  Confirmation
+@endsection
+
 @push('css')
   <link rel="stylesheet" href="{{ asset('css/confirm.css') }}">
 @endpush
 
 @section('content')
-  <h2>お問い合わせ内容確認</h2>
+  <div class="confirm">
+    <h2 class="confirm__title">お問い合わせ内容確認</h2>
 
-  <p class="confirm-text">{{ $inputs[Contact::COL_NAME] }}</p>
-  <p class="confirm-text">{{ $inputs[Contact::COL_EMAIL] }}</p>
-  <p class="confirm-text">{{ $inputs[Contact::COL_TEL] }}</p>
-  <p class="confirm-text">{{ $inputs[Contact::COL_CONTENT] }}</p>
+    <div class="confirm__body">
+      @foreach ($inputs as $key => $value)
+          <label class="confirm__body-label">{{ Contact::COL_LABELS[$key] }}</label>
+          <p class="confirm__body-content">{{ $value }}</p>
+      @endforeach
+    </div>
 
-  <form action="{{ route('contacts.store') }}" method="post" id="form">
-    @csrf
-    <button formaction="{{ route('contacts.back') }}">修正する</button>
-    <button id="submit-btn">送信する</button>
-  </form>
+    <form action="{{ route('contacts.store') }}" method="post" id="confirm__form">
+      @csrf
+      <div class="confirm__form-inner">
+        <button formaction="{{ route('contacts.back') }}" id="edit-button" class="confirm__form-btn">修正する</button>
+        <button id="submit-button" class="confirm__form-btn">送信する</button>
+      </div>
+    </form>
+  </div>
 @endsection
 
 @push('scripts')
     <script>
-      const form = document.getElementById('form');
-      const button = document.getElementById('submit-btn');
+      const form = document.getElementById('confirm__form');
+      const submitButton = document.getElementById('submit-button');
+      const editButton = document.getElementById('edit-button');
 
       form.addEventListener('submit', function() {
-        button.disabled = true;
-        button.innerText = "送信中...";
+        submitButton.disabled = true;
+        submitButton.innerText = "送信中...";
+
+        editButton.disable = true;
       });
 
       window.addEventListener('pageshow', function() {
-        button.disabled = false;
-        button.innerText = "送信する";
+        submitButton.disabled = false;
+        submitButton.innerText = "送信する";
+
+        editButton.disabled = false;
       });
     </script>
 @endpush

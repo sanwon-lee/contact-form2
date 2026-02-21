@@ -4,6 +4,10 @@
   use App\Models\Contact;
 @endphp
 
+@section('title')
+  Contact form
+@endsection
+
 @push('css')
   <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endpush
