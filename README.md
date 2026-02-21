@@ -14,7 +14,7 @@
 DB_HOST=replace_me
 DB_DATABASE=replace_me
 DB_USERNAME=replace_me
-DB_PASSWORD=replace=me
+DB_PASSWORD=replace_me
 
 <!-- 値をdatabaseにします -->
 SESSION_DRIVER=file
