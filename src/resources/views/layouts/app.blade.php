@@ -12,6 +12,19 @@
 <body>
   <header class="header">
     <a href="{{ route('contacts.index') }}" class="header__logo">Contact Form</a>
+
+    @if (Auth::check())
+        <nav class="header__nav">
+          <ul class="header__nav-inner">
+            <li>
+              <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button>ログアウト</button>
+              </form>
+            </li>
+          </ul>
+        </nav>
+    @endif
   </header>
 
   <main class="main">

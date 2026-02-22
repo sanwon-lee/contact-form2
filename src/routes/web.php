@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('contacts')->name('contacts.')->group(function () {
+Route::get('/', [AuthController::class, 'index']);
+
+Route::middleware('auth')->prefix('contacts')->name('contacts.')->group(function () {
   Route::resource('/', ContactController::class)->only('index', 'store');
 
   Route::post('confirm', [ContactController::class, 'confirm'])->name('confirm');
